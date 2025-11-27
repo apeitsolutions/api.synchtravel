@@ -1,0 +1,216 @@
+
+@extends('hotel_manager.manager_master')
+
+@section('content')
+
+<div class="dashboard-content">
+    <h4 style="color:#a30000">New Hotel</h4>
+    <form action="{{ url('hotel_manger/add_hotel_sub') }}" method="post" enctype="multipart/form-data">
+        @csrf
+    <div class="row">
+        <div class="col-md-9">
+        
+        <div class="row mb-3">
+            <div class="col-md-12">
+            @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show" style="background-color:#d4edda;" role="alert">
+            {{ session('success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        @endif
+
+        @if (session('error'))
+        <div class="alert alert-success alert-dismissible fade show" style="background-color:#d4edda;" role="alert">
+            {{ session('error') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        @endif
+                 <h5 style="color:#045fa6">Add Property Details</h5>
+                 <hr style="border:0.1px solid #cfcfcf;">
+            </div>
+                <div class="col-md-6">
+                    <label for="">PROPERTY TITLE</label>
+                    <input id="property_name" type="text" class="form-control @error('property_name') is-invalid @enderror" name="property_name" value="{{ old('property_name') }}" autocomplete="property_name" autofocus>
+
+                    @error('property_name')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+                <div class="col-md-6">
+                    <label for="">PROPERTY IMAGE</label>
+                    <input id="property_img" type="file" class="form-control @error('property_img') is-invalid @enderror" name="property_img" value="{{ old('property_img') }}" autocomplete="property_img" autofocus>
+
+                    @error('property_img')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div> 
+                
+                <div class="col-md-4">
+                    <label for="">PROPERTY TYPE</label>
+                    <select name="property_type" id="" class="form-control">
+                        <option value="hotel" selected="selected">Hotel</option>
+                        <option value="villa">Villa</option>
+                        <option value="apartment">Apartment</option>
+                        <option value="resort">Resort</option>
+                    </select>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="">PRICE TYPE</label>
+                    <select name="price_type" id="" class="form-control">
+                        <option value="Budget">Budget</option>
+                        <option value="Economy">Economy</option>
+                        <option value="Moderate">Moderate</option>
+                        <option value="Deluxe">Deluxe</option>
+                        <option value="Premium">Premium</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="">PRICE STAR</label>
+                    <select name="star_type" id="" class="form-control">
+                        <option value="1">1 Star</option>
+                        <option value="2">2 Star</option>
+                        <option value="3">3 Star</option>
+                        <option value="4">4 Star</option>
+                        <option value="5">5 Star</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="">CHECK-IN FROM</label>
+                    <select name="hotel_check_in" id="" class="form-control">
+                        <option value="07:00">07:00</option>
+                        <option value="07:30">07:30</option> 
+                        <option value="08:00">08:00</option> 
+                        <option value="08:30">08:30</option> 
+                        <option value="09:00">09:00</option>
+                        <option value="09:30">09:30</option> 
+                        <option value="10:00">10:00</option>
+                        <option value="10:30">10:30</option> 
+                        <option value="11:00">11:00</option>
+                        <option value="11:30">11:30</option> 
+                        <option selected value="12:00">12:00</option>
+                        <option value="12:30">12:30</option> 
+                        <option value="13:00">13:00</option>
+                        <option value="13:30">13:30</option> 
+                        <option value="14:00">14:00</option>
+                        <option value="14:30">14:30</option> 
+                        <option value="15:00">15:00</option>
+                        <option value="15:30">15:30</option> 
+                        <option value="16:00">16:00</option>
+                        <option value="16:30">16:30</option> 
+                        <option value="17:00">17:00</option>
+                        <option value="17:30">17:30</option> 
+                        <option value="18:00">18:00</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="">CHECK-OUT TO</label>
+                    <select name="hotel_check_out" id="" class="form-control">
+                        <option value="07:00">07:00</option>
+                        <option value="07:30">07:30</option> 
+                        <option value="08:00">08:00</option> 
+                        <option value="08:30">08:30</option> 
+                        <option value="09:00">09:00</option>
+                        <option value="09:30">09:30</option> 
+                        <option value="10:00">10:00</option>
+                        <option value="10:30">10:30</option> 
+                        <option value="11:00">11:00</option>
+                        <option value="11:30">11:30</option> 
+                        <option selected value="12:00">12:00</option>
+                        <option value="12:30">12:30</option> 
+                        <option value="13:00">13:00</option>
+                        <option value="13:30">13:30</option> 
+                        <option value="14:00">14:00</option>
+                        <option value="14:30">14:30</option> 
+                        <option value="15:00">15:00</option>
+                        <option value="15:30">15:30</option> 
+                        <option value="16:00">16:00</option>
+                        <option value="16:30">16:30</option> 
+                        <option value="17:00">17:00</option>
+                        <option value="17:30">17:30</option> 
+                        <option value="18:00">18:00</option>
+                    </select>
+                </div>
+
+                
+              
+
+                <div class="col-md-12">
+                    <label for="">GOOGLE MAP URL</label>
+                    <input id="property_google_map" type="text" class="form-control @error('property_google_map') is-invalid @enderror" name="property_google_map" value="{{ old('property_google_map') }}" autocomplete="property_google_map" autofocus>
+
+                    @error('property_google_map')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div> 
+
+                <div class="col-md-6">
+                    <label for="">COUNTRY</label>
+                    <select name="property_country" id="" class="form-control">
+                        <option value="SAU">Saudi Arabia</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="">COUNTRY</label>
+                    <select name="property_city" id="" class="form-control">
+                        <option value="Makkah">Makkah</option>
+                        <option value="Madina">Madina</option>
+                        <option value="Jeddah">Jeddah</option>
+                        <option value="Hail">Hail</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="">COUNTRY CODE</label>
+                    <select name="property_country_code" id="" class="form-control">
+                        <option value="966">Saudi Arabia 966</option>   
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="">Phone Number</label>
+                    <input id="property_phone" type="text" class="form-control @error('property_phone') is-invalid @enderror" name="property_phone" value="{{ old('property_phone') }}" autocomplete="property_phone" autofocus>
+
+                    @error('property_phone')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+                
+                <div class="col-md-12">
+                    <label for="">PROPERTY DESCRIPTION</label>
+                    <textarea name="property_desc" row="5" class="form-control @error('property_desc') is-invalid @enderror"  value="{{ old('property_desc') }}"  autocomplete="property_desc" placeholder="Enter ga message"></textarea>
+
+                    @error('property_desc')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div> 
+                <div class="col-md-12 mt-3 text-right">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div> 
+            </div>
+           
+        </div>
+    </div>
+    </form>
+</div>
+
+
+
+@endsection

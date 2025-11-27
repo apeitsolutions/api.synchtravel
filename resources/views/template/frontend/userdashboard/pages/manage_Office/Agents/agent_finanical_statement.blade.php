@@ -1,0 +1,235 @@
+@extends('template/frontend/userdashboard/layout/default')
+@section('content')
+
+    <style>
+        .nav-link{
+          color: #575757;
+          font-size: 18px;
+        }
+    </style>
+  
+    <div class="content-wrapper">
+        <section class="content" style="">
+            <!-- Start Content-->
+            <div class="container-fluid">
+              <!-- start page title -->
+              <div class="row">
+                  <div class="col-12">
+                      <div class="page-title-box">
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Tour Bookings</a></li>
+                                <li class="breadcrumb-item active">financial_statement</li>
+                            </ol>
+                        </div>
+                        <h4 class="page-title">Agent Financial Statement</h4>
+                      </div>
+                  </div>
+              </div>
+              <!-- end page title --> 
+    
+                <div class="row">
+                    <div class="col-12">
+                        <!--<div class="card">-->
+                            <!--<div class="card-body">-->
+                                @if (session('error'))
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert" id="alert_hide">
+                                      <strong> {{ session('error') }}</strong>
+                                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                @endif
+                                
+                                <div class="row mb-2">
+                                    <div class="col-sm-5">
+                                      <!-- <a href="javascript:void(0);" class="btn btn-danger mb-2"><i class="mdi mdi-plus-circle me-2"></i> View Tentative Bookings</a> -->
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <div class="text-sm-end">
+                                        <!-- <button type="button" class="btn btn-success mb-2 me-1"><i class="mdi mdi-cog-outline"></i></button>
+                                        <button type="button" class="btn btn-light mb-2 me-1">Import</button>
+                                        <butt on type="button" class="btn btn-light mb-2">Export</button>-->
+                                      </div>
+                                    </div><!-- end col-->
+                                </div>
+        
+                                <!--<div class="table-responsive">-->
+                                    <!--<div id="example_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer"> -->
+                                        <div class="row">
+                                           
+                                            <input style="width: 200px;border-radius: 5px;border-block-color: red;height: 40px;" id="myInput" type="text" placeholder="Search..">
+                                            
+                                            <table class="table nowrap example23 dataTable no-footer" id="example_23" aria-describedby="example_1_info">
+                                                
+                                                <thead class="table-light">
+                                                  
+                                                     <tr>
+                                                          <td class="cs-text_center cs-semi_bold" >Id</td>
+                                                          <td class="cs-text_center cs-semi_bold" >Payment</td>
+                                                          <td class="cs-text_center cs-semi_bold" >Received</td>
+                                                          <td class="cs-text_center cs-semi_bold">Over Paid</td>
+                                                          <td class="cs-text_center cs-semi_bold">Date</td>
+                                                          <td class="cs-text_center cs-semi_bold">Total Amount</td>
+                                                          <td class="cs-text_center cs-semi_bold">Total Paid</td>
+                                                          <td class="cs-text_center cs-semi_bold">Remaining</td>
+                                                          
+                                                          <td class="cs-text_center cs-semi_bold">Type</td>
+                                                          <td class="cs-text_center cs-semi_bold">Payment Method</td>
+                                                        </tr>
+                                                </thead>
+                                                <tbody id="myTable">
+                                           
+                                                       
+                                                        
+                                                        @if(isset($data))
+                                                            
+                                                            @foreach($data as $value)
+                                                           
+                                                                    <tr>
+                                                                        <td class="cs-primary_color">{{  $loop->iteration }}</td>
+                                                                        <td class="cs-primary_color">{{  $value->payment }}</td>
+                                                                        <td class="cs-primary_color">{{ $value->received }}</td>
+                                                                        <td class="cs-primary_color">{{ $value->over_paid }}</td>
+                                                                        <td class="cs-primary_color">{{ $value->date }}</td>
+                                                                       
+                                                                        <td class="cs-primary_color cs-text_center">{{ $value->total_amount }}</td>
+                                                                        <td class="cs-primary_color cs-text_center">{{ $value->paid_amount }}</td>
+                                                                        
+                                                                        <td class="cs-primary_color cs-text_center">{{ $value->remaining_amount }} 
+                                                                          
+                                                                        </td>
+                                                                        
+                                                                        <td class="cs-primary_color cs-text_center">
+                                                                            <?php 
+                                                                                if(isset($value->deposit_id)){
+                                                                                    echo "Deposit "."<br>"."Deposit Id ".$value->deposit_id;
+                                                                                }
+                                                                                
+                                                                                 if(isset($value->refund_id)){
+                                                                                     echo "Refund "."<br>"."Refund Id ".$value->refund_id;
+                                                                                }
+                                                                                
+                                                                                 if(isset($value->invoice_no)){
+                                                                                    echo "Invoice "."<br>"."Invoice Id ".$value->invoice_no;
+                                                                                }
+                                                                                
+                                                                                 if(isset($value->package_invoice_no)){
+                                                                                    echo "Package Invoice "."<br>"."Invoice No ".$value->package_invoice_no;
+                                                                                }
+                                                                         
+                                                                                
+                                                                               
+                                                                            
+                                                                            ?>
+                                                                        </td>
+                                                                        <td class="cs-primary_color">{{ $value->remarks }}</td>
+                                                                    </tr>
+                                                               
+                                                            @endforeach
+                                                       @endif
+                                                </tbody>
+                                          
+                                            </table>
+                                        </div>
+                                    <!--</div> -->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    </div>
+                </div>           
+            </div> 
+            <!-- container -->
+        </section>
+    </div>
+
+     
+    
+    <div id="payment_edit" class="modal fade" tabindex="-1" aria-modal="true" role="dialog">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header modal-colored-header bg-primary">
+            <h4 class="modal-title" id="compose-header-modalLabel">Recieve Amount</h4>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <!-- <div class="modal-body"> -->
+         <div class="p-1">
+            <div class="modal-body px-3 pt-3 pb-0">
+               <form action="{{ URL::to('super_admin/update_customer_payment') }}" method="post">
+                  @csrf                       
+                  <input hidden="" readonly="" value="350" name="package_id" class="form-control" type="text" id="package_id" required="">
+                  <div class="mb-2">
+                     <label for="tourId" class="form-label">Tour ID</label>
+                     <input readonly="" value="" name="tourId" class="form-control" type="text" id="tourId" required="">
+                     <input  value="" name="payment_id" class="form-control" type="text" id="payment_id" required="">
+                  </div>
+                  <div class="mb-2">
+                     <label for="date" class="form-label">Date</label>
+                     <input value="" name="date" class="form-control" type="date" id="date" required="">
+                  </div>
+                  <div class="mb-2">
+                     <label for="customer_name" class="form-label">Customer Name</label>
+                     <input readonly="" name="customer_name" value="" class="form-control" type="text" id="customer_name" required="">
+                  </div>
+                  <div class="mb-2">
+                     <label for="package_title" class="form-label">Package Title</label>
+                     <input readonly="" name="package_title" value="" class="form-control" type="text" id="package_title" required="">
+                  </div>
+                  <div class="mb-2">
+                     <label for="total_amount" class="form-label">Total Amount</label>
+                     <input readonly="" name="total_amount" value="" class="form-control" type="text" id="total_amount" required="">
+                  </div>
+                  <!--<div class="mb-2">-->
+                  <!--   <label for="recieved_amount" class="form-label">Recieved Amount</label>-->
+                  <!--   <input name="recieved_amount" class="form-control" type="text" id="recieved_amount" required="" placeholder="Recieved Amount">-->
+                  <!--</div>-->
+                  <!--<div class="mb-2">-->
+                  <!--   <label for="remaining_amount" class="form-label">Remaining Amount</label>-->
+                  <!--   <input readonly="" name="remaining_amount" class="form-control" type="text" id="remaining_amount" required="">-->
+                  <!--</div>-->
+                  <div class="mb-2">
+                     <label for="amount_paid" class="form-label">Amount Paid</label>
+                     <input  value="" name="amount_paid" class="form-control" type="text" id="amount_paid" required="">
+                  </div>
+                  <!--<div style="padding: 10px 0px 10px 0px;">-->
+                  <!--   <button style="padding: 10px 30px 10px 30px;" type="submit" class="btn btn-primary" data-bs-dismiss="modal"><i class="mdi mdi-send me-1"></i>Recieve</button>-->
+                  <!--   <button style="margin-left: 5px;padding: 10px 30px 10px 30px;" type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>-->
+                  <!--</div>-->
+                   <div class="mb-2 text-center">
+                     <button class="btn btn-primary" type="submit">Update</button>
+                     </div> 
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+
+
+@endsection
+
+
+@section('scripts')
+    <script>
+    
+    $('#example_23').DataTable({
+                scrollX: true,
+            });
+        function editPayment(payment_data){
+            var payment_data = JSON.parse(payment_data);
+             console.log(payment_data);
+             $('#payment_edit').modal('show');
+             
+             $('#tourId').val(payment_data['tourId'])
+             $('#date').val(payment_data['date'])
+             $('#payment_id').val(payment_data['id'])
+             
+             $('#customer_name').val(payment_data['customer_name'])
+             $('#package_title').val(payment_data['package_title'])
+             $('#total_amount').val(payment_data['total_amount'])
+             $('#amount_paid').val(payment_data['recieved_amount'])
+        }
+    </script>
+    
+@endsection
