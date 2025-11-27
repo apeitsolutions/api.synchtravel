@@ -3,7 +3,6 @@
 .env
 .env.backup
 .env.production
-composer.json
 composer.lock
 .phpactor.json
 .phpunit.result.cache
