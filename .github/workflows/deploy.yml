@@ -1,13 +1,12 @@
 name: Deploy to EC2
-
+ 
 on:
   push:
     branches: [ main ]
-
+ 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    
     steps:
     - name: Deploy to Server
       uses: appleboy/ssh-action@master
@@ -16,6 +15,16 @@ jobs:
         username: ${{ secrets.EC2_USER }}
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
+          echo "=== Connection successful ==="
+          whoami
+          echo "=== Checking directory ==="
+          ls -la /var/www/laravel-app/
+          echo "=== Changing to app directory ==="
           cd /var/www/laravel-app/api.synchtravel
+          pwd
+          echo "=== Git status ==="
+          git status
+          echo "=== Git remote ==="
+          git remote -v
+          echo "=== Attempting git pull ==="
           git pull origin main
-          
